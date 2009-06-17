@@ -1,2 +1,42 @@
-Read `perldoc lib/RT/Extension/PriorityAsString.pm`
+NAME
+    RT::Extension::PriorityAsString - show priorities in RT as strings
+    instead of numbers
+
+SYNOPSIS
+        # in RT config
+        Set(@Plugins, qw(... RT::Extension::PriorityAsString ...));
+
+        # Specify a mapping between priority strings and the internal
+        # numeric representation
+        Set(%PriorityAsString, (Low => 0, Medium => 50, High => 100));
+
+        # which order to display the priority strings
+        # if you don't specify this, the strings in the PriorityAsString
+        # hash will be sorted and displayed
+        Set(@PriorityAsStringOrder, qw(Low Medium High));
+
+INSTALLATION
+    *NOTE* that it only works with RT 3.8.3 and newer.
+
+        perl Makefile.PL
+        make
+        make install (may need root permissions)
+
+        Edit your /opt/rt3/etc/RT_SiteConfig.pm (example is in synopsis above)
+
+        rm -rf /opt/rt3/var/mason_data/obj
+        Restart your webserver
+
+  PriorityAsString
+
+    Returns String: Various Ticket Priorities as either a string or integer
+
+COPYRIGHT AND LICENCE
+    Copyright (C) 2008, Best Practical Solutions LLC.
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+AUTHOR
+    Ruslan Zakirov <ruz@bestpractical.com>
 
