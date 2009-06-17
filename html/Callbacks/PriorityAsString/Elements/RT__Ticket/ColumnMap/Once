@@ -1,0 +1,27 @@
+<%ARGS>
+$COLUMN_MAP => {}
+</%ARGS>
+<%INIT>
+my $printer = sub {
+    my ($class, $string) = @_;
+    return '' unless defined $string && length $string;
+
+    my $escaped = $m->interp->apply_escapes($string, 'h');
+    my $loc_escaped = $m->interp->apply_escapes(loc($string), 'h');
+    return \( qq{<span class="ticket-info-$class-}. lc($escaped) .qq{">$loc_escaped</span>} );
+    
+};
+foreach my $field (qw(Priority InitialPriority FinalPriority)) {
+    $COLUMN_MAP->{ $field .'Number' } ||= $COLUMN_MAP->{ $field };
+
+    my $class = lc($field);
+    $class =~ s/(?=<.)(?=priority)/-/;
+
+    my $method = $field .'AsString';
+
+    $COLUMN_MAP->{ $field }{'value'} = sub {
+        return $printer->( $class, $_[0]->$method() );
+    };
+}
+return;
+</%INIT>

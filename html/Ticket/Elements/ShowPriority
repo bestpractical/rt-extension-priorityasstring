@@ -1,0 +1,4 @@
+<span class="ticket-info-priority"><% $Ticket->PriorityAsString %></span>/<span class="ticket-info-final-priority"><% $Ticket->FinalPriorityAsString %></span>
+<%ARGS>
+$Ticket => undef
+</%ARGS>

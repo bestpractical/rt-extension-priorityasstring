@@ -1,0 +1,20 @@
+---
+abstract: 'show priorities in RT as strings instead of numbers'
+author: ~
+distribution_type: module
+generated_by: 'Module::Install version 0.77'
+license: GPLv2
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: RT-Extension-PriorityAsString
+no_index:
+  directory:
+    - etc
+    - html
+    - po
+    - var
+    - inc
+requires:
+  perl: 5.8.3
+version: 0.01
