@@ -7,4 +7,6 @@ all_from    'lib/RT/Extension/PriorityAsString.pm';
 
 requires('RT' => '3.8.3');
 
+no_index('package' => 'RT::Ticket');
+
 WriteAll();

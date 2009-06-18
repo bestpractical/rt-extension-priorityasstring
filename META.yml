@@ -1,8 +1,13 @@
 ---
 abstract: 'show priorities in RT as strings instead of numbers'
-author: ~
+author:
+  - ', Best Practical Solutions LLC.'
+build_requires:
+  ExtUtils::MakeMaker: 6.42
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
 distribution_type: module
-generated_by: 'Module::Install version 0.77'
+generated_by: 'Module::Install version 0.91'
 license: GPLv2
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -10,11 +15,13 @@ meta-spec:
 name: RT-Extension-PriorityAsString
 no_index:
   directory:
-    - etc
     - html
-    - po
-    - var
     - inc
+  package:
+    - RT::Ticket
 requires:
+  RT: 3.8.3
   perl: 5.8.3
-version: 0.01
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.02
