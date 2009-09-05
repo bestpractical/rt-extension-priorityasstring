@@ -1,0 +1,8 @@
+0.03 2009-09-05
+
+    * return exact match if it's in the map, switch to
+      heuristic only after the check
+
+0.02 2009-06-18
+
+    * initial release
