@@ -68,7 +68,11 @@ sub _PriorityAsString {
     my $priority = shift;
     return undef unless defined $priority && length $priority;
 
-    my %map   = RT->Config->Get('PriorityAsString');
+    my %map = RT->Config->Get('PriorityAsString');
+    if ( my ($res) = grep $map{$_} == $priority, keys %map ) {
+        return $res;
+    }
+
     my @order = reverse grep defined && length, RT->Config->Get('PriorityAsStringOrder');
     @order = sort { $map{$b} <=> $map{$a} } keys %map
         unless @order;
