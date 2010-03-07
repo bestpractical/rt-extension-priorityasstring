@@ -1,4 +1,4 @@
-<select name="<% $Name %>">
+<select class="select-priority" name="<% $Name %>">
 % unless ( defined $Default ) {
 <option value="">-</option>
 % }
@@ -11,7 +11,7 @@ foreach my $label ( @order ) {
         ($value, $selected) = ($map{ $label }, '');
     }
 </%PERL>
-<option value="<% $value %>" <% $selected |n %>><% $label %></option>
+<option class="<% lc $label %>" value="<% $value %>" <% $selected |n %>><% loc($label) %></option>
 % }
 </select>
 <%ARGS>

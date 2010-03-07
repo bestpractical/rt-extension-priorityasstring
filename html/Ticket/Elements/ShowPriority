@@ -1,4 +1,9 @@
-<span class="ticket-info-priority"><% $Ticket->PriorityAsString %></span>/<span class="ticket-info-final-priority"><% $Ticket->FinalPriorityAsString %></span>
+<span class="ticket-info-priority-<% lc($current) %>"><% loc($current) %></span>/\
+<span class="ticket-info-final-priority-<% lc($final) %>"><% loc($final) %></span>
 <%ARGS>
 $Ticket => undef
 </%ARGS>
+<%INIT>
+my $current = $Ticket->PriorityAsString;
+my $final = $Ticket->FinalPriorityAsString;
+</%INIT>
