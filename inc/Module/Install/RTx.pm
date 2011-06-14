@@ -44,14 +44,14 @@ sub RTx {
         local @INC = (
             @INC,
             $ENV{RTHOME} ? ( $ENV{RTHOME}, "$ENV{RTHOME}/lib" ) : (),
-            map { ( "$_/rt3/lib", "$_/lib/rt3", "$_/lib" ) } grep $_,
+            map { ( "$_/rt3/lib", "$_/lib/rt3", "$_/rt4/lib", "$_/lib/rt4", "$_/lib" ) } grep $_,
             @prefixes
         );
         until ( eval { require RT; $RT::LocalPath } ) {
             warn
                 "Cannot find the location of RT.pm that defines \$RT::LocalPath in: @INC\n";
             $_ = $self->prompt("Path to your RT.pm:") or exit;
-            push @INC, $_, "$_/rt3/lib", "$_/lib/rt3", "$_/lib";
+            push @INC, $_, "$_/rt3/lib", "$_/lib/rt3", "$_/rt4/lib", "$_/lib/rt4", "$_/lib";
         }
     }
 
