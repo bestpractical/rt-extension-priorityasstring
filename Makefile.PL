@@ -5,7 +5,7 @@ RTx         'RT-Extension-PriorityAsString';
 license     'GPLv2';
 all_from    'lib/RT/Extension/PriorityAsString.pm';
 
-requires('RT' => '3.8.3');
+requires_rt('RT' => '3.8.3');
 
 no_index('package' => 'RT::Ticket');
 
