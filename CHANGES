@@ -1,3 +1,7 @@
+0.04 2011-06-14
+
+    * fix compatibility with RT 4.0.0
+
 0.03 2009-09-05
 
     * return exact match if it's in the map, switch to
