@@ -1,5 +1,5 @@
 <select class="select-priority" name="<% $Name %>">
-% unless ( defined $Default ) {
+% if ( RT->Config->Get('PriorityAsStringAllowEmpty') || ! defined $Default ) {
 <option value="">-</option>
 % }
 <%PERL>

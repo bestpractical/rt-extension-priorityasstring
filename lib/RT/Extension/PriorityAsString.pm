@@ -23,6 +23,7 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
     # if you don't specify this, the strings in the PriorityAsString
     # hash will be sorted and displayed
     Set(@PriorityAsStringOrder, qw(Low Medium High));
+    Set($PriorityAsStringAllowEmpty, 1);
 
 =head1 INSTALLATION
 
