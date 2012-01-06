@@ -4,6 +4,6 @@
 $Ticket => undef
 </%ARGS>
 <%INIT>
-my $current = $Ticket->PriorityAsString;
-my $final = $Ticket->FinalPriorityAsString;
+my $current = $Ticket->PriorityAsString || '';
+my $final = $Ticket->FinalPriorityAsString || '';
 </%INIT>
