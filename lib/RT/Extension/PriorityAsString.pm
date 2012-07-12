@@ -24,6 +24,9 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
     # hash will be sorted and displayed
     Set(@PriorityAsStringOrder, qw(Low Medium High));
 
+    # Uncomment if you want to only apply to some queues
+    # Set(@PriorityAsStringQueues, qw( Default ));
+
 =head1 INSTALLATION
 
 *NOTE* that it only works with RT 3.8.3 and newer.

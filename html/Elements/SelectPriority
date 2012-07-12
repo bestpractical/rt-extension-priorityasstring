@@ -1,32 +1,32 @@
-<select class="select-priority" name="<% $Name %>">
-% unless ( defined $Default ) {
-<option value="">-</option>
-% }
-<%PERL>
-foreach my $label ( @order ) {
-    my ($value, $selected);
-    if ( $label eq $default_label ) {
-        ($value, $selected) = ($Default, 'selected="selected"');
-    } else {
-        ($value, $selected) = ($map{ $label }, '');
-    }
-</%PERL>
-<option class="<% lc $label %>" value="<% $value %>" <% $selected |n %>><% loc($label) %></option>
-% }
-</select>
+<input name="<% $Name %>" value="<% $Default %>" size="5" />
 <%ARGS>
 $Name => 'Priority'
 $Default => undef
 </%ARGS>
 <%INIT>
 
-my %map   = RT->Config->Get('PriorityAsString');
-my @order = grep defined && length, RT->Config->Get('PriorityAsStringOrder');
-@order = sort { $map{$a} <=> $map{$b} } keys %map
-    unless @order;
+my %queues;
+$queues{$_}++ for @{ RT->Config->Get('PriorityAsStringQueues') || [] };
 
-my $default_label = '';
-if ( defined $Default && length $Default ) {
-    $default_label = RT::Ticket->_PriorityAsString( $Default ) || '';
+# If enabled for all queues, always show the drop-down
+return $m->comp("/Elements/SelectPriorityAsString",%ARGS)
+    unless keys %queues;
+
+# Some callsites we can easily override with callbacks with logic to
+# know when to call SelectPriorityAsString; for ticket create and queue
+# modify, we need to inspect the callstack.
+my $caller      = $m->callers(1)->path;
+my $caller_args = $m->caller_args(1);
+my $QueueObj = RT::Queue->new( $session{'CurrentUser'} );
+if ( $caller eq "/Admin/Queues/Modify.html") {
+    $QueueObj->Load( $caller_args->{id} ) || $QueueObj->Load( $caller_args->{Name} );
+} elsif ( $caller eq "/Ticket/Create.html" or $caller eq "/m/ticket/create" ) {
+    $QueueObj->Load( $caller_args->{Queue} );
 }
+return $m->comp("/Elements/SelectPriorityAsString",%ARGS)
+    if $QueueObj->Id and $queues{$QueueObj->Name};
+
+
+
+$Default = '' unless defined $Default;
 </%INIT>

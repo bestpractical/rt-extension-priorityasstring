@@ -1,9 +1,16 @@
+% if (keys %queues and not $queues{$Ticket->QueueObj->Name}) {
+<% $Ticket->Priority %>/<% $Ticket->FinalPriority || ''%>
+% } else {
 <span class="ticket-info-priority-<% lc($current) %>"><% loc($current) %></span>/\
 <span class="ticket-info-final-priority-<% lc($final) %>"><% loc($final) %></span>
+% }
 <%ARGS>
 $Ticket => undef
 </%ARGS>
 <%INIT>
+my %queues;
+$queues{$_}++ for @{ RT->Config->Get('PriorityAsStringQueues') || [] };
+
 my $current = $Ticket->PriorityAsString || '';
 my $final = $Ticket->FinalPriorityAsString || '';
 </%INIT>
