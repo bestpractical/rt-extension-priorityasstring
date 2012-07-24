@@ -24,8 +24,14 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
     # hash will be sorted and displayed
     Set(@PriorityAsStringOrder, qw(Low Medium High));
 
-    # Uncomment if you want to only apply to some queues
-    # Set(@PriorityAsStringQueues, qw( Default ));
+    # Uncomment if you want to apply different configurations to
+    # different queues.  Each key is the name of a different queue;
+    # queues which do not appear in this configuration will use RT's
+    # default numeric scale.
+    # Set(%PriorityAsStringQueues,
+    #    General => { Low => 0, Medium => 50, High => 100 },
+    #    Binary  => { Low => 0, High => 10 },
+    # );
 
 =head1 INSTALLATION
 
@@ -71,7 +77,15 @@ sub _PriorityAsString {
     my $priority = shift;
     return undef unless defined $priority && length $priority;
 
-    my %map = RT->Config->Get('PriorityAsString');
+    my %map;
+    my $queues = RT->Config->Get('PriorityAsStringQueues');
+    if (@_) {
+        %map = %{ shift(@_) };
+    } elsif ($queues and $queues->{$self->QueueObj->Name}) {
+        %map = %{ $queues->{$self->QueueObj->Name} };
+    } else {
+        %map = RT->Config->Get('PriorityAsStringQueues');
+    }
     if ( my ($res) = grep $map{$_} == $priority, keys %map ) {
         return $res;
     }

@@ -5,8 +5,7 @@ $Default => undef
 </%ARGS>
 <%INIT>
 
-my %queues;
-$queues{$_}++ for @{ RT->Config->Get('PriorityAsStringQueues') || [] };
+my %queues = %{ RT->Config->Get('PriorityAsStringQueues') || {} };
 
 # If enabled for all queues, always show the drop-down
 return $m->comp("/Elements/SelectPriorityAsString",%ARGS)
@@ -23,7 +22,7 @@ if ( $caller eq "/Admin/Queues/Modify.html") {
 } elsif ( $caller eq "/Ticket/Create.html" or $caller eq "/m/ticket/create" ) {
     $QueueObj->Load( $caller_args->{Queue} );
 }
-return $m->comp("/Elements/SelectPriorityAsString",%ARGS)
+return $m->comp("/Elements/SelectPriorityAsString",%ARGS, Mapping => $queues{$QueueObj->Name})
     if $QueueObj->Id and $queues{$QueueObj->Name};
 
 

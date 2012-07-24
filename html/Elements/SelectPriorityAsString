@@ -17,16 +17,17 @@ foreach my $label ( @order ) {
 <%ARGS>
 $Name => 'Priority'
 $Default => undef
+$Mapping => undef
 </%ARGS>
 <%INIT>
 
-my %map   = RT->Config->Get('PriorityAsString');
+my %map   = $Mapping ? %{ $Mapping } : RT->Config->Get('PriorityAsString');
 my @order = grep defined && length, RT->Config->Get('PriorityAsStringOrder');
 @order = sort { $map{$a} <=> $map{$b} } keys %map
     unless @order;
 
 my $default_label = '';
 if ( defined $Default && length $Default ) {
-    $default_label = RT::Ticket->_PriorityAsString( $Default ) || '';
+    $default_label = RT::Ticket->_PriorityAsString( $Default, \%map ) || '';
 }
 </%INIT>

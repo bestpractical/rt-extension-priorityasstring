@@ -3,8 +3,7 @@ $TicketObj => undef
 $Fields => undef
 </%ARGS>
 <%INIT>
-my %as_string;
-$as_string{$_}++ for @{ RT->Config->Get('PriorityAsStringQueues') || [] };
+my %as_string = %{ RT->Config->Get('PriorityAsStringQueues') || {} };
 
 # Leave it as-is if all queues use PriorityAsString; the overridden
 # /Elements/SelectPriority catches this case and always shows the
@@ -15,6 +14,9 @@ return unless keys %as_string;
 return unless $TicketObj and $as_string{$TicketObj->QueueObj->Name};
 
 # Swap out the /Elements/SelectPriority for /Elements/SelectPriorityAsString
-$_->{comp} = "/Elements/SelectPriorityAsString"
-  for grep {$_->{comp}||'' eq "/Elements/SelectPriority"} @{ $Fields };
+for my $field (@{ $Fields }) {
+    next unless ($field->{comp}||'') eq "/Elements/SelectPriority";
+    $field->{comp} = "/Elements/SelectPriorityAsString";
+    $field->{args}{Mapping} = $as_string{$TicketObj->QueueObj->Name};
+}
 </%INIT>

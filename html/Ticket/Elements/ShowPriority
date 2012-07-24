@@ -8,8 +8,7 @@
 $Ticket => undef
 </%ARGS>
 <%INIT>
-my %queues;
-$queues{$_}++ for @{ RT->Config->Get('PriorityAsStringQueues') || [] };
+my %queues = %{ RT->Config->Get('PriorityAsStringQueues') || {} };
 
 my $current = $Ticket->PriorityAsString || '';
 my $final = $Ticket->FinalPriorityAsString || '';
