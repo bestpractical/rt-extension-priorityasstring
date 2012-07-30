@@ -51,12 +51,7 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
 require RT::Ticket;
 package RT::Ticket;
 
-=head2 PriorityAsString
-
-Returns String: Various Ticket Priorities as either a string or integer
-
-=cut
-
+# Returns String: Various Ticket Priorities as either a string or integer
 sub PriorityAsString {
     my $self = shift;
     return $self->_PriorityAsString($self->Priority);

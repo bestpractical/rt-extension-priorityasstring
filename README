@@ -15,6 +15,15 @@ SYNOPSIS
         # hash will be sorted and displayed
         Set(@PriorityAsStringOrder, qw(Low Medium High));
 
+        # Uncomment if you want to apply different configurations to
+        # different queues.  Each key is the name of a different queue;
+        # queues which do not appear in this configuration will use RT's
+        # default numeric scale.
+        # Set(%PriorityAsStringQueues,
+        #    General => { Low => 0, Medium => 50, High => 100 },
+        #    Binary  => { Low => 0, High => 10 },
+        # );
+
 INSTALLATION
     *NOTE* that it only works with RT 3.8.3 and newer.
 
@@ -26,10 +35,6 @@ INSTALLATION
 
         rm -rf /opt/rt3/var/mason_data/obj
         Restart your webserver
-
-  PriorityAsString
-
-    Returns String: Various Ticket Priorities as either a string or integer
 
 COPYRIGHT AND LICENCE
     Copyright (C) 2008, Best Practical Solutions LLC.
