@@ -4,7 +4,7 @@ use warnings;
 
 package RT::Extension::PriorityAsString;
 
-our $VERSION = '0.04';
+our $VERSION = '0.04_01';
 
 =head1 NAME
 
