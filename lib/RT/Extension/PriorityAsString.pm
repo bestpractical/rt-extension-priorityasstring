@@ -28,6 +28,8 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
     # different queues.  Each key is the name of a different queue;
     # queues which do not appear in this configuration will use RT's
     # default numeric scale.
+    # This option means that %PriorityAsString is ignored (no global
+    # override, you must specify a set of priorities per queue).
     # Set(%PriorityAsStringQueues,
     #    General => { Low => 0, Medium => 50, High => 100 },
     #    Binary  => { Low => 0, High => 10 },
