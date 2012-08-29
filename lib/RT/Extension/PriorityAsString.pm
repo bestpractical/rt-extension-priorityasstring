@@ -96,9 +96,6 @@ sub _PriorityAsString {
     @order = sort { $map{$b} <=> $map{$a} } keys %map
         unless @order;
 
-    # XXX: not supported yet
-    #my $show  = RT->Config->Get('PriorityAsStringShow') || 'string';
-
     foreach my $label ( @order ) {
         return $label if $priority >= $map{ $label };
     }
