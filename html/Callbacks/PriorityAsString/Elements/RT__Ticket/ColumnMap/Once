@@ -19,7 +19,7 @@ foreach my $field (qw(Priority InitialPriority FinalPriority)) {
 
     my $method = $field .'AsString';
 
-    my %queues = %{ RT->Config->Get('PriorityAsStringQueues') || {} };
+    my %queues = RT->Config->Get('PriorityAsStringQueues');
     if (not keys %queues) {
         $COLUMN_MAP->{ $field }{'value'} = sub {
             return $printer->( $class, $_[0]->$method() );

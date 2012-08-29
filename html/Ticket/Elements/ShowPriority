@@ -10,5 +10,5 @@
 $Ticket => undef
 </%ARGS>
 <%INIT>
-my %queues = %{ RT->Config->Get('PriorityAsStringQueues') || {} };
+my %queues = RT->Config->Get('PriorityAsStringQueues');
 </%INIT>

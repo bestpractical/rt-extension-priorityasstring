@@ -5,7 +5,7 @@ $Default => undef
 </%ARGS>
 <%INIT>
 
-my %queues = %{ RT->Config->Get('PriorityAsStringQueues') || {} };
+my %queues = RT->Config->Get('PriorityAsStringQueues');
 
 # If enabled for all queues, always show the drop-down
 return $m->comp("/Elements/SelectPriorityAsString",%ARGS)

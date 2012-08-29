@@ -22,7 +22,7 @@ $Mapping => undef
 <%INIT>
 
 my %map   = $Mapping ? %{ $Mapping } : RT->Config->Get('PriorityAsString');
-my @order = grep defined && length, RT->Config->Get('PriorityAsStringOrder');
+my @order = RT->Config->Get('PriorityAsStringOrder');
 @order = sort { $map{$a} <=> $map{$b} } keys %map
     unless @order;
 

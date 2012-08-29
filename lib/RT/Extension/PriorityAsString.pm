@@ -53,6 +53,11 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
 require RT::Ticket;
 package RT::Ticket;
 
+$RT::Config::META{PriorityAsString}{Type} = 'HASH';
+$RT::Config::META{PriorityAsStringOrder}{Type} = 'ARRAY';
+$RT::Config::META{PriorityAsStringQueues}{Type} = 'HASH';
+
+
 # Returns String: Various Ticket Priorities as either a string or integer
 sub PriorityAsString {
     my $self = shift;
@@ -87,7 +92,7 @@ sub _PriorityAsString {
         return $res;
     }
 
-    my @order = reverse grep defined && length, RT->Config->Get('PriorityAsStringOrder');
+    my @order = reverse RT->Config->Get('PriorityAsStringOrder');
     @order = sort { $map{$b} <=> $map{$a} } keys %map
         unless @order;
 
