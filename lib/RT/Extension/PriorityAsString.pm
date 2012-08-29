@@ -19,9 +19,11 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
     # numeric representation
     Set(%PriorityAsString, (Low => 0, Medium => 50, High => 100));
 
-    # which order to display the priority strings
-    # if you don't specify this, the strings in the PriorityAsString
-    # hash will be sorted and displayed
+    # Fine-tuned control of the order of priorities as displayed in the
+    # drop-down box; usually this computed automatically and need not be
+    # set explicitly.  It can be used to limit the set of options
+    # presented during update, but allow a richer set of levels when
+    # they are adjusted automatically.
     Set(@PriorityAsStringOrder, qw(Low Medium High));
 
     # Uncomment if you want to apply different configurations to
@@ -88,15 +90,10 @@ sub _PriorityAsString {
     } else {
         %map = RT->Config->Get('PriorityAsString');
     }
-    if ( my ($res) = grep $map{$_} == $priority, keys %map ) {
-        return $res;
-    }
 
-    my @order = reverse RT->Config->Get('PriorityAsStringOrder');
-    @order = sort { $map{$b} <=> $map{$a} } keys %map
-        unless @order;
-
-    foreach my $label ( @order ) {
+    # Count from high down to low until we find one that our number is
+    # greater than or equal to.
+    foreach my $label ( sort { $map{$b} <=> $map{$a} } keys %map ) {
         return $label if $priority >= $map{ $label };
     }
     return "unknown";
