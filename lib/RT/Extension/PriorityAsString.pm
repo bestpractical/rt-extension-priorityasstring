@@ -24,14 +24,16 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
     # set explicitly.  It can be used to limit the set of options
     # presented during update, but allow a richer set of levels when
     # they are adjusted automatically.
-    Set(@PriorityAsStringOrder, qw(Low Medium High));
+    # Set(@PriorityAsStringOrder, qw(Low Medium High));
 
     # Uncomment if you want to apply different configurations to
     # different queues.  Each key is the name of a different queue;
     # queues which do not appear in this configuration will use RT's
     # default numeric scale.
-    # This option means that %PriorityAsString is ignored (no global
-    # override, you must specify a set of priorities per queue).
+    # This option means that %PriorityAsString and
+    # @PriorityAsStringOrder are ignored (no global override, you must
+    # specify a set of priorities per queue). You can safely leave them
+    # out of your RT_SiteConfig.pm to avoid confusion.
     # Set(%PriorityAsStringQueues,
     #    General => { Low => 0, Medium => 50, High => 100 },
     #    Binary  => { Low => 0, High => 10 },
