@@ -81,7 +81,7 @@ sub _PriorityAsString {
     } elsif ($queues and $queues->{$self->QueueObj->Name}) {
         %map = %{ $queues->{$self->QueueObj->Name} };
     } else {
-        %map = RT->Config->Get('PriorityAsStringQueues');
+        %map = RT->Config->Get('PriorityAsString');
     }
     if ( my ($res) = grep $map{$_} == $priority, keys %map ) {
         return $res;
