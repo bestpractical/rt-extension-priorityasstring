@@ -6,6 +6,11 @@ my $printer = sub {
     my ($class, $string) = @_;
     return '' unless defined $string && length $string;
 
+    my $request_path = $HTML::Mason::Commands::r->path_info;
+    if ($request_path =~ /Results\.tsv/) {
+        return $string;
+    }
+
     my $escaped = $m->interp->apply_escapes($string, 'h');
     my $loc_escaped = $m->interp->apply_escapes(loc($string), 'h');
     return \( qq{<span class="ticket-info-$class-}. lc($escaped) .qq{">$loc_escaped</span>} );
