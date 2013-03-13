@@ -8,7 +8,7 @@ my $printer = sub {
 
     my $request_path = $HTML::Mason::Commands::r->path_info;
     if ($request_path =~ /Results\.tsv/) {
-        return $string;
+        return loc($string);
     }
 
     my $escaped = $m->interp->apply_escapes($string, 'h');
