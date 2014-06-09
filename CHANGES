@@ -1,3 +1,7 @@
+0.05 2014-06-09
+    * Allow restricting PriorityAsString to individual queues
+    * Avoid inserting HTML into CSV export
+
 0.04 2011-06-14
     * RT4 compatibility
     * better localization and css classes from cloos
