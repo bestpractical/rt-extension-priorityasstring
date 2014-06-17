@@ -1,16 +1,20 @@
+1.00 2014-06-17
+ - Actually make PriorityAsStringOrder optional, as the documentation
+   claimed
+ - Packaging updates
+
 0.05 2014-06-09
-    * Allow restricting PriorityAsString to individual queues
-    * Avoid inserting HTML into CSV export
+ - Allow restricting PriorityAsString to individual queues
+ - Avoid inserting HTML into CSV export
 
 0.04 2011-06-14
-    * RT4 compatibility
-    * better localization and css classes from cloos
+ - RT4 compatibility
+ - better localization and css classes from cloos
 
 0.03 2009-09-05
-
-    * return exact match if it's in the map, switch to
-      heuristic only after the check
+ - return exact match if it's in the map, switch to heuristic only after
+   the check
 
 0.02 2009-06-18
+ - initial release
 
-    * initial release

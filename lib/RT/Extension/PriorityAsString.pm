@@ -4,7 +4,7 @@ use warnings;
 
 package RT::Extension::PriorityAsString;
 
-our $VERSION = '0.05';
+our $VERSION = '1.00';
 
 =head1 NAME
 
@@ -41,16 +41,35 @@ RT::Extension::PriorityAsString - show priorities in RT as strings instead of nu
 
 =head1 INSTALLATION
 
-*NOTE* that it only works with RT 3.8.3 and newer.
+=over
 
-    perl Makefile.PL
-    make
-    make install (may need root permissions)
+=item C<perl Makefile.PL>
 
-    Edit your /opt/rt3/etc/RT_SiteConfig.pm (example is in synopsis above)
+=item C<make>
 
-    rm -rf /opt/rt3/var/mason_data/obj
-    Restart your webserver
+=item C<make install>
+
+May need root permissions
+
+=item Edit your F</opt/rt4/etc/RT_SiteConfig.pm>
+
+If you are using RT 4.2 or greater, add this line:
+
+    Plugin('RT::Extension::PriorityAsString');
+
+For RT 4.0, add this line:
+
+    Set(@Plugins, qw(RT::Extension::PriorityAsString));
+
+or add C<RT::Extension::PriorityAsString> to your existing C<@Plugins> line.
+
+=item Clear your mason cache
+
+    rm -rf /opt/rt4/var/mason_data/obj
+
+=item Restart your webserver
+
+=back
 
 =cut
 
@@ -101,16 +120,26 @@ sub _PriorityAsString {
     return "unknown";
 }
 
-=head1 COPYRIGHT AND LICENCE
+=head1 AUTHOR
 
-Copyright (C) 2008, Best Practical Solutions LLC.
+Best Practical Solutions, LLC E<lt>modules@bestpractical.comE<gt>
+
+=head1 BUGS
+
+All bugs should be reported via email to
+
+    L<bug-RT-Extension-PriorityAsString@rt.cpan.org|mailto:bug-RT-Extension-PriorityAsString@rt.cpan.org>
+
+or via the web at
+
+    L<rt.cpan.org|http://rt.cpan.org/Public/Dist/Display.html?Name=RT-Extension-PriorityAsString>.
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright (C) 2008-2014, Best Practical Solutions LLC.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
-
-=head1 AUTHOR
-
-Ruslan Zakirov E<lt>ruz@bestpractical.comE<gt>
 
 =cut
 

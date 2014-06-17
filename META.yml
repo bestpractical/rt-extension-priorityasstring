@@ -1,7 +1,7 @@
 ---
 abstract: 'show priorities in RT as strings instead of numbers'
 author:
-  - ', Best Practical Solutions LLC.'
+  - 'Best Practical Solutions, LLC <modules@bestpractical.com>'
 build_requires:
   ExtUtils::MakeMaker: 6.59
 configure_requires:
@@ -9,7 +9,7 @@ configure_requires:
 distribution_type: module
 dynamic_config: 1
 generated_by: 'Module::Install version 1.08'
-license: gplv2
+license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
@@ -24,4 +24,8 @@ requires:
   perl: 5.8.3
 resources:
   license: http://dev.perl.org/licenses/
-version: '0.05'
+  repository: https://github.com/bestpractical/rt-extension-priorityasstring
+version: '1.00'
+x_module_install_rtx_version: 0.34_04
+x_requires_rt: 4.0.0
+x_rt_too_new: 4.4.0
