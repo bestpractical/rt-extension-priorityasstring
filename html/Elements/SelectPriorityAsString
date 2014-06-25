@@ -22,8 +22,12 @@ $Mapping => undef
 <%INIT>
 
 my %map   = $Mapping ? %{ $Mapping } : RT->Config->Get('PriorityAsString');
-my @order = $Mapping ? sort { $map{$a} <=> $map{$b} } keys %map
-  : grep {exists $map{$_}} RT->Config->Get('PriorityAsStringOrder');
+my @order;
+if (not $Mapping and RT->Config->Get('PriorityAsStringOrder')) {
+    @order = grep {exists $map{$_}} RT->Config->Get('PriorityAsStringOrder');
+} else {
+    @order = sort { $map{$a} <=> $map{$b} } keys %map;
+}
 
 my $default_label = '';
 if ( defined $Default && length $Default ) {
