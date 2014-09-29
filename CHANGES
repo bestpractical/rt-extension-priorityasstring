@@ -1,3 +1,6 @@
+1.02 2014-09-29
+ - Provide our own copy of CSSClass(), for compatibility with RT 4.0
+
 1.01 2014-09-29
  - Ensure that priorities with spaces have them translated to _ before
    being embedded in CSS classes
