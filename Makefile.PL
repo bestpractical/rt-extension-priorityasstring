@@ -9,4 +9,5 @@ rt_too_new '4.4.0';
 
 no_index('package' => 'RT::Ticket');
 
+sign;
 WriteAll();

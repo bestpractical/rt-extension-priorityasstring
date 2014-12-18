@@ -1,3 +1,6 @@
+1.03 2014-12-18
+ - Sign the release
+
 1.02 2014-09-29
  - Provide our own copy of CSSClass(), for compatibility with RT 4.0
 
