@@ -1,7 +1,9 @@
 CHANGES
 html/Callbacks/PriorityAsString/Elements/RT__Ticket/ColumnMap/Once
+html/Callbacks/PriorityAsString/Elements/ShowTransaction/Default
 html/Callbacks/PriorityAsString/Search/Elements/PickBasics/Default
 html/Callbacks/PriorityAsString/Ticket/Elements/EditBasics/MassageFields
+html/Callbacks/PriorityAsString/Ticket/Elements/ShowTransaction/ModifyDisplay
 html/Elements/SelectPriority
 html/Elements/SelectPriorityAsString
 html/Ticket/Elements/ShowPriority

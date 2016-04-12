@@ -1,0 +1,29 @@
+<%init>
+# for RT 4.0 only
+
+# check if we are called in the right place
+# because there are two ModifyDisplay callbacks
+return unless defined $$text;
+
+# currently not support PriorityAsStringQueues because we had to check
+# in which queue the ticket was when this transaction was created
+return if defined RT->Config->Get('PriorityAsStringQueues');
+return unless defined RT->Config->Get('PriorityAsString');
+
+my $field = $Transaction->Field || '';
+return unless $field =~ /^(?:Final)?Priority$/;
+
+my $old_value = $Ticket->_PriorityAsString($Transaction->OldValue);
+my $new_value = $Ticket->_PriorityAsString($Transaction->NewValue);
+
+$$text = loc( "[_1] changed from [_2] to [_3]",
+    loc($field),
+    "'" . loc($Ticket->_PriorityAsString($Transaction->OldValue)) . "'",
+    "'" . loc($Ticket->_PriorityAsString($Transaction->NewValue)) . "'"
+);
+</%init>
+<%args>
+$Ticket
+$Transaction
+$text => undef
+</%args>
