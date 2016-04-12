@@ -1,0 +1,38 @@
+<%init>
+# for RT 4.2 and later
+
+return unless $Object->isa('RT::Ticket');
+
+# currently not support PriorityAsStringQueues because we had to check
+# in which queue the ticket was when this transaction was created
+return if defined RT->Config->Get('PriorityAsStringQueues');
+return unless defined RT->Config->Get('PriorityAsString');
+
+my $field = $Transaction->Field || '';
+return unless $field =~ /^(?:Final)?Priority$/;
+
+my $old_value = $Object->_PriorityAsString($Transaction->OldValue);
+my $new_value = $Object->_PriorityAsString($Transaction->NewValue);
+
+my $CSSClass = sub {
+    my $value = shift;
+    return '' unless defined $value;
+    $value =~ s/[^A-Za-z0-9_-]/_/g;
+    return $value;
+};
+
+my $class_prefix = $field eq 'Priority'
+  ? 'ticket-info-priority-'
+  : 'ticket-info-final-priority-';
+
+$$Description = loc( "[_1] changed from [_2] to [_3]",
+    loc($field),
+    '<span class="' . $class_prefix . $CSSClass->(lc($old_value)) . '">' . loc($old_value) . '</span>',
+    '<span class="' . $class_prefix . $CSSClass->(lc($new_value)) . '">' . loc($new_value) . '</span>'
+);
+</%init>
+<%args>
+$Object
+$Transaction
+$Description
+</%args>
